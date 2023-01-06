@@ -301,3 +301,17 @@ ggplot(df_forest_fire, aes(x = day, y = day_ordinal)) +
   geom_col() +
   labs(x = "Day", y = "Ordinal Value")
 ```
+
+#### c) Formulate the questions for EDA (Exploratory Data Analysis) and perform EDA based on the data provided and address the issues to understand the impact of fire and the resulting burned area. 
+
+1. What are the main features of the dataset, and how are they distributed?
+- You can use summary statistics, such as mean, median, and standard deviation, to understand the central tendency and dispersion of each feature. You can also use visualizations, such as histograms and box plots, to understand the distribution of each feature.
+
+2. How are the features related to one another?
+- You can use scatter plots to visualize the relationships between pairs of features. You can also use correlation coefficients, such as Pearson's r, to quantify the strength and direction of the relationships.
+
+3. Are there any missing values in the dataset, and how are they distributed?
+- You can use the is.na function in R to identify missing values, and you can use summary statistics and visualizations to understand how they are distributed.
+
+4. How does the burned area of a fire vary with respect to different factors, such as temperature, humidity, and wind speed?
+- You can use visualizations, such as scatter plots and box plots, to explore the relationships between the burned area and different factors. You can also use statistical techniques, such as linear regression, to model the relationships.
