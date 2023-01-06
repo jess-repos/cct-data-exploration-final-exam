@@ -209,4 +209,4 @@ Relevance: Not all data is relevant to the question or problem you are trying to
 
 Usability: Data may be in a format that is not easily usable by the tools or software you are using for your analysis. Data preparation involves transforming the data into a usable format, such as converting it to a comma-separated values (CSV) file.
 
-![Illustration](data-exploration-illustration.jpeg)
+![](data-exploration-illustration.jpeg)
