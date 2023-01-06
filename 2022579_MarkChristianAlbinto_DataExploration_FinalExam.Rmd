@@ -184,15 +184,15 @@ Overall, it is generally not recommended to simply omit records or fields with m
 Import Dataset
 
 ```{r}
-df <- read.csv('forestfires.csv')
+df_forest_fire <- read.csv('forestfires.csv')
 
-head(df)
+head(df_forest_fire)
 ```
 
 Take a look at the structure of the dataset
 
 ```{r}
-str(df)
+str(df_forest_fire)
 ```
 
 #### a) Discuss and describe the purpose and need for data exploration and preparation within data analytics projects. Use illustrations to justify your answer. 
@@ -210,3 +210,81 @@ Relevance: Not all data is relevant to the question or problem you are trying to
 Usability: Data may be in a format that is not easily usable by the tools or software you are using for your analysis. Data preparation involves transforming the data into a usable format, such as converting it to a comma-separated values (CSV) file.
 
 ![](data-exploration-illustration.jpeg)
+
+#### b)	Choose a relevant encoding technique to transform the categorical data to numeric format.
+
+There are several encoding techniques that can be used for month and day variables, and the best technique depends on the characteristics of the data and the goals of the analysis. Here are a few options:
+
+Ordinal encoding: This involves assigning a unique integer value to each month or day. For example, you could assign 1 to January, 2 to February, and so on. This is useful if there is an inherent order to the months or days, such as when they are represented by numbers (e.g. 1 for January, 2 for February, etc.).
+
+Here is the demonstration of ordinal values using the month and day
+
+```{r}
+forest_fire_months <- df_forest_fire$month
+
+unique(forest_fire_months)
+```
+
+
+```{r}
+# Create an new dataframe with ordinal values to match with forest fire dataframe
+months <- c("jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec")
+
+# Create a sequence of numbers from 1 to the length of the months vector
+months_ordinal_values <- 1:length(months)
+
+# Combine the ordinal values with the months into a data frame
+df_months_ordinal <- data.frame(month = months, ordinal = months_ordinal_values)
+
+df_months_ordinal
+```
+
+Matching forest fire months to ordinal values to the newly created dataset
+
+```{r}
+forest_fire_months_ordinal <- match(forest_fire_months, df_months_ordinal$month)
+
+forest_fire_months_ordinal
+```
+
+Merge ordinals to forest fire dataset
+
+```{r}
+df_forest_fire$months_ordinal <- forest_fire_months_ordinal
+
+df_forest_fire
+```
+
+```{r}
+forest_fire_days <- df_forest_fire$day
+
+unique(forest_fire_days)
+```
+
+
+```{r}
+# Create an new dataframe with ordinal values to match with forest fire dataframe
+days <- c("mon", "tue", "wed", "thu", "fri", "sat", "sun")
+
+days_ordinal_values <- 1:length(days)
+
+df_days_ordinal <- data.frame(day = days, ordinal = days_ordinal_values)
+
+df_days_ordinal
+```
+
+Matching forest fire days to ordinal values to the newly created dataset
+
+```{r}
+forest_fire_days_ordinal <- match(forest_fire_days, df_days_ordinal$day)
+
+forest_fire_days_ordinal
+```
+
+Merge ordinals to forest fire dataset
+
+```{r}
+df_forest_fire$days_ordinal <- forest_fire_days_ordinal
+
+df_forest_fire
+```
