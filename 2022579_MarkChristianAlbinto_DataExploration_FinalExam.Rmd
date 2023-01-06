@@ -5,7 +5,7 @@ output: html_notebook
 
 Student: 2022579 Mark Christian Albinto
 
-Lecturer: Muhammad Iqbal
+Lecturer: Dr. Muhammad Iqbal
 
 Date: 06 January 2023 10:00 - 07 January 2023 10:00
 
