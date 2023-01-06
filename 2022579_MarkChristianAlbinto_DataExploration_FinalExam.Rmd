@@ -99,13 +99,9 @@ Here are a few points to consider when deciding whether to treat zip codes as te
 
 * Zip codes are often used to identify geographic regions, such as cities, neighborhoods, or census tracts. They are not continuous variables like height or weight, which can take on any value within a certain range.
 
-* Zip codes do not have a natural unit of measurement. For example, a height of 5'10" can be expressed as 70 inches, and a weight of 150 pounds can be expressed as 68 kilograms. There is no equivalent unit for zip codes.
-
-* Some zip codes contain letters, in addition to numbers. For example, the zip code for the Canadian city of Laval, Quebec is "H7L 5W2". This would not be possible if zip codes were treated as numeric variables.
+* Some zip codes contain letters, in addition to numbers. This would not be possible if zip codes were treated as numeric variables.
 
 * Zip codes are often used as a key field in databases. This means that they are used to uniquely identify records in a table. It is generally easier to use text fields as keys, rather than numeric fields, because text fields can accommodate a wider range of values and are less prone to errors.
-
-In summary, while it is possible to treat zip codes as numeric variables, it is generally more appropriate to treat them as text variables. This will ensure that the data is stored and analyzed correctly, and will make it easier to use zip codes as keys in databases.
 
 #### c) Identify which columns are suitable for the categorical datatypes in the Table 2.1 and provide the appropriate encoding scheme to replace the variables with numeric data.
 
@@ -115,9 +111,9 @@ The following columns are suitable for the categorical datatypes:
 
 * 'Zip': This column represents a zip code, which is a categorical variable because it does not have a natural ordering.
 
-* 'Gender': This column represents a person's gender, which is a categorical variable because it is not a continuous or ordered variable.
+* 'Gender': This column represents a person's gender (Male or Female), which is a categorical variable because it is not a continuous or ordered variable.
 
-* 'Marital Status': This column represents a person's marital status, which is a categorical variable because it is not a continuous or ordered variable.
+* 'Marital Status': This column represents a person's marital status (Divorced, Married, Single, Widowed), which is a categorical variable because it is not a continuous or ordered variable.
 
 To replace these variables with numeric data, you can use an encoding scheme such as one-hot encoding. One-hot encoding creates a new binary column for each category, with a value of 1 indicating that the row belongs to that category and a value of 0 indicating that it does not.
 
@@ -171,9 +167,7 @@ There are several reasons why a birthdate variable might be preferred to an age 
 
 3. Age can be calculated from a birthdate, but the reverse is not always possible. For example, if you only have an age and no birthdate, you cannot accurately determine the exact date of birth. This can lead to errors or inaccuracies in the data.
 
-4. With a birthdate, you can easily calculate a person's age at a given point in time. This can be useful for analyzing trends or patterns over time. With an age variable, you would not have this level of detail.
-
-5. A birthdate can be used to calculate a wide range of age-related variables, such as the number of days until a person's next birthday, the number of years since a person's birth, or a person's astrological sign. This is not possible with an age variable.
+4. A birthdate can be used to calculate a wide range of age-related variables, such as the number of days until a person's next birthday, the number of years since a person's birth, or a person's astrological sign. This is not possible with an age variable.
 
 In summary, a birthdate variable is generally preferred to an age variable in a database because it is more accurate, does not change, allows for more detailed analysis, and is more flexible.
 
@@ -192,8 +186,6 @@ There are a few reasons why it is generally not recommended to simply omit recor
 5. Missing data can be non-random: Missing data is often non-random, which means that it is more likely to occur in certain types of records or fields. For example, missing data is often more prevalent in fields that are sensitive or difficult to measure (e.g., income, race). Omitting records or fields with missing values could introduce bias into the analysis if the missing data is non-random.
 
 6. Other techniques are often more effective: There are many techniques for handling missing data that are more effective than simply omitting records or fields with missing values. For example, imputation techniques, such as mean imputation or multiple imputation, can be used to estimate missing values based on the available data. These techniques can help to preserve the sample size and reduce bias, while also accounting for the fact that the data is missing.
-
-Overall, it is generally not recommended to simply omit records or fields with missing values from the analysis because it can result in the loss of important information, biased results, and a reduced sample size. Instead, it is usually better to use a more sophisticated approach to handling missing data, such as imputation, which involves estimating missing values based on the available data.
 
 ---
 
@@ -231,11 +223,13 @@ Usability: Data may be in a format that is not easily usable by the tools or sof
 
 #### b)	Choose a relevant encoding technique to transform the categorical data to numeric format.
 
-There are several encoding techniques that can be used for month and day variables, and the best technique depends on the characteristics of the data and the goals of the analysis. Here are a few options:
-
 Ordinal encoding: This involves assigning a unique integer value to each month or day. For example, you could assign 1 to January, 2 to February, and so on. This is useful if there is an inherent order to the months or days, such as when they are represented by numbers (e.g. 1 for January, 2 for February, etc.).
 
-Here is the demonstration of ordinal values using the month and day
+Ordinal encoding is a way to encode categorical variables when there is an inherent order or ranking to the categories. An example of this would be months of the year, where January comes before February and so on. Similarly, the days of the week have an inherent order, with Monday coming before Tuesday and so on. By ordinal encoding these variables, we can preserve the ranking or order of the categories. This can be useful in certain machine learning models, particularly decision trees, where the order of the categories can be used to make decisions.
+
+For example, if we are trying to predict the weather, we might use the month as a feature. If we ordinal encode the month feature, the model can use the ranking of the months (e.g., January is first, February is second) to make predictions about the weather. If we one-hot encode the month feature, the model would not have any way to use the ranking of the months to make predictions.
+
+Here is the demonstration of ordinal encoding of the month and day variables
 
 ```{r}
 forest_fire_months <- df_forest_fire$month
@@ -342,16 +336,47 @@ cor_matrix_forest_fire <- cor(df_num_forest_fire)
 cor_matrix_forest_fire
 ```
 
+Melt the correlation matrix
+
+```{r}
+library(reshape2)
+df_cor_matrix_forest_fire <- subset(melt(cor_matrix_forest_fire))
+
+df_cor_matrix_forest_fire
+```
+
 ```{r}
 # install.packages('reshape2')
 library(reshape2)
 
-ggplot(melt(cor_matrix_forest_fire), aes(x = Var1, y = Var2, fill = value)) +
+ggplot(df_cor_matrix_forest_fire, aes(x = Var1, y = Var2, fill = value)) +
   geom_tile() +
   scale_fill_gradient(low = "white", high = "steelblue") +
-  labs(x = '', y = '')
+  labs(x = '', y = '') + 
+  ggtitle('Correlation Between Numeric Variables in Forest Fire Dataset')
 ```
 
+Find the pairs with moderate to strong negative correlation (-0.3 to -0.999)
+
+```{r}
+# install.packages('dplyr')
+library(dplyr)
+negative_correlation <- df_cor_matrix_forest_fire[(df_cor_matrix_forest_fire$value <= -0.3) & (df_cor_matrix_forest_fire$value >= -0.999), ]
+
+negative_correlation_unique <- negative_correlation %>% distinct(value, .keep_all = TRUE)
+
+negative_correlation_unique[order(negative_correlation_unique$value),]
+```
+
+Find the pairs with moderate to strong positive correlation (0.3 to 0.999)
+
+```{r}
+positive_correlation <- df_cor_matrix_forest_fire[(df_cor_matrix_forest_fire$value >= 0.3) & (df_cor_matrix_forest_fire$value <= 0.999), ]
+
+positive_correlation_unique <- positive_correlation %>% distinct(value, .keep_all = TRUE)
+
+positive_correlation_unique[order(-positive_correlation_unique$value),]
+```
 
 3. Are there any missing values in the dataset, and how are they distributed?
 - Using the is.na function in R to identify missing values, and you can use summary statistics and visualizations to understand how they are distributed.
@@ -368,7 +393,8 @@ forest_fire_na_counts
 
 ```{r}
 ggplot(df_forest_fire, aes(x = temp, y = RH, size = rain)) +
-  geom_point(colour = 'steelblue')
+  geom_point(colour = 'steelblue') + 
+  ggtitle('Temperature by Humidity by Rain')
 ```
 
 
