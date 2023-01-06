@@ -136,6 +136,15 @@ df_table_21_one_hot_gender <- data.frame(predict(df_table_21_one_hot_formula_gen
 df_table_21_one_hot_gender
 ```
 
+Combine encoded data to the dataframe
+
+```{r}
+df_table_21 <- cbind(df_table_21, df_table_21_one_hot_gender)
+
+df_table_21
+```
+
+
 ```{r}
 df_table_21_one_hot_formula_marital_status <- dummyVars("~ Marital_Status", data=df_table_21)
 
@@ -144,6 +153,13 @@ df_table_21_one_hot_marital_status <- data.frame(predict(df_table_21_one_hot_for
 df_table_21_one_hot_marital_status
 ```
 
+Combine encoded data to the dataframe
+
+```{r}
+df_table_21 <- cbind(df_table_21, df_table_21_one_hot_marital_status)
+
+df_table_21
+```
 
 #### d) Explain why a birthdate variable would be preferred to an age variable in a database based on the presence of data attribute in Table 2.1
 
@@ -153,13 +169,13 @@ There are several reasons why a birthdate variable might be preferred to an age 
 
 2. A person's age changes every year, but their birthdate remains the same. This means that if you store a person's age in a database, you will need to update it every year. On the other hand, if you store a person's birthdate, it will not need to be updated.
 
-* Age can be calculated from a birthdate, but the reverse is not always possible. For example, if you only have an age and no birthdate, you cannot accurately determine the exact date of birth. This can lead to errors or inaccuracies in the data.
+3. Age can be calculated from a birthdate, but the reverse is not always possible. For example, if you only have an age and no birthdate, you cannot accurately determine the exact date of birth. This can lead to errors or inaccuracies in the data.
 
-3. With a birthdate, you can easily calculate a person's age at a given point in time. This can be useful for analyzing trends or patterns over time. With an age variable, you would not have this level of detail.
+4. With a birthdate, you can easily calculate a person's age at a given point in time. This can be useful for analyzing trends or patterns over time. With an age variable, you would not have this level of detail.
 
-4. A birthdate can be used to calculate a wide range of age-related variables, such as the number of days until a person's next birthday, the number of years since a person's birth, or a person's astrological sign. This is not possible with an age variable.
+5. A birthdate can be used to calculate a wide range of age-related variables, such as the number of days until a person's next birthday, the number of years since a person's birth, or a person's astrological sign. This is not possible with an age variable.
 
-Overall, a birthdate variable is generally preferred to an age variable in a database because it is more accurate, does not change, allows for more detailed analysis, and is more flexible.
+In summary, a birthdate variable is generally preferred to an age variable in a database because it is more accurate, does not change, allows for more detailed analysis, and is more flexible.
 
 #### e) Explain why it is not recommended, as a strategy for dealing with missing data, to simply omit the records or fields with missing values from the analysis. Briefly explain your answer.
 
@@ -389,3 +405,9 @@ The Forest Fires dataset contains information about the weather and other enviro
 5. Wind: Wind can spread a fire and make it more difficult to control.
 
 5. Rain: Wet conditions can reduce the likelihood of a fire.
+
+#### e) Prepare the data for the machine learning model after encoding and feature selection, predict the burned area of forest fires using the machine learning model.
+
+#### f) You are free to perform any process to enhance an understanding of data preparation and exploration of the Forest data set.
+
+Performed processes are provided in between tasks as demonstrations and visualizations. 
