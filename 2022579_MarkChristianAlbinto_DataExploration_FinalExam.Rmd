@@ -230,10 +230,8 @@ unique(forest_fire_months)
 # Create an new dataframe with ordinal values to match with forest fire dataframe
 months <- c("jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec")
 
-# Create a sequence of numbers from 1 to the length of the months vector
 months_ordinal_values <- 1:length(months)
 
-# Combine the ordinal values with the months into a data frame
 df_months_ordinal <- data.frame(month = months, ordinal = months_ordinal_values)
 
 df_months_ordinal
@@ -250,9 +248,18 @@ forest_fire_months_ordinal
 Merge ordinals to forest fire dataset
 
 ```{r}
-df_forest_fire$months_ordinal <- forest_fire_months_ordinal
+df_forest_fire$month_ordinal <- forest_fire_months_ordinal
 
 df_forest_fire
+```
+
+```{r}
+# install.packages('ggplot2')
+library(ggplot2)
+
+ggplot(df_forest_fire, aes(x = month, y = month_ordinal)) +
+  geom_col() +
+  labs(x = "Month", y = "Ordinal Value")
 ```
 
 ```{r}
@@ -284,7 +291,13 @@ forest_fire_days_ordinal
 Merge ordinals to forest fire dataset
 
 ```{r}
-df_forest_fire$days_ordinal <- forest_fire_days_ordinal
+df_forest_fire$day_ordinal <- forest_fire_days_ordinal
 
 df_forest_fire
+```
+
+```{r}
+ggplot(df_forest_fire, aes(x = day, y = day_ordinal)) +
+  geom_col() +
+  labs(x = "Day", y = "Ordinal Value")
 ```
