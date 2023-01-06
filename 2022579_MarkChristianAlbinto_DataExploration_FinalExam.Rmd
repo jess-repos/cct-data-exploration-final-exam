@@ -179,6 +179,8 @@ There are a few reasons why it is generally not recommended to simply omit recor
 
 Overall, it is generally not recommended to simply omit records or fields with missing values from the analysis because it can result in the loss of important information, biased results, and a reduced sample size. Instead, it is usually better to use a more sophisticated approach to handling missing data, such as imputation, which involves estimating missing values based on the available data.
 
+---
+
 ### Question 2
 
 Import Dataset
@@ -305,13 +307,85 @@ ggplot(df_forest_fire, aes(x = day, y = day_ordinal)) +
 #### c) Formulate the questions for EDA (Exploratory Data Analysis) and perform EDA based on the data provided and address the issues to understand the impact of fire and the resulting burned area. 
 
 1. What are the main features of the dataset, and how are they distributed?
-- You can use summary statistics, such as mean, median, and standard deviation, to understand the central tendency and dispersion of each feature. You can also use visualizations, such as histograms and box plots, to understand the distribution of each feature.
+- Using summary statistics, such as mean, median, and standard deviation, to get an understanding of the central tendency and dispersion of each feature. And using visualizations, such as histograms and box plots, to understand the distribution of each feature.
+
+```{r}
+summary(df_forest_fire)
+```
+
 
 2. How are the features related to one another?
-- You can use scatter plots to visualize the relationships between pairs of features. You can also use correlation coefficients, such as Pearson's r, to quantify the strength and direction of the relationships.
+- Using scatter plots to visualize the relationships between pairs of features. You can also use correlation coefficients, such as Pearson's r, to quantify the strength and direction of the relationships.
+
+```{r}
+# select numerical values from the dataframe
+df_num_forest_fire <- df_forest_fire[c(1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13)]
+
+cor_matrix_forest_fire <- cor(df_num_forest_fire)
+
+cor_matrix_forest_fire
+```
+
+```{r}
+# install.packages('reshape2')
+library(reshape2)
+
+ggplot(melt(cor_matrix_forest_fire), aes(x = Var1, y = Var2, fill = value)) +
+  geom_tile() +
+  scale_fill_gradient(low = "white", high = "steelblue") +
+  labs(x = '', y = '')
+```
+
 
 3. Are there any missing values in the dataset, and how are they distributed?
-- You can use the is.na function in R to identify missing values, and you can use summary statistics and visualizations to understand how they are distributed.
+- Using the is.na function in R to identify missing values, and you can use summary statistics and visualizations to understand how they are distributed.
+
+```{r}
+forest_fire_na_counts <- colSums(is.na(df_forest_fire[1:13]))
+
+forest_fire_na_counts
+```
+
 
 4. How does the burned area of a fire vary with respect to different factors, such as temperature, humidity, and wind speed?
-- You can use visualizations, such as scatter plots and box plots, to explore the relationships between the burned area and different factors. You can also use statistical techniques, such as linear regression, to model the relationships.
+- Using visualizations, such as scatter plots and box plots, to explore the relationships between the burned area and different factors. And using statistical techniques, such as linear regression, to model the relationships.
+
+```{r}
+ggplot(df_forest_fire, aes(x = temp, y = RH, size = rain)) +
+  geom_point(colour = 'steelblue')
+```
+
+
+#### d) Analyse the benefits and drawbacks for feature selection and extraction techniques. Which features are important from the provided dataset? (Feature Selection Method)
+
+There are several benefits and drawbacks to feature selection and extraction techniques:
+
+Benefits:
+
+1. Reduce the complexity of the model and improve the model's interpretability.
+
+2. Improve the generalization ability of the model.
+
+3. Speed up the training process.
+
+4. Reduce the risk of overfitting.
+
+Drawbacks:
+
+1. May discard useful information and decrease the performance of the model.
+
+2. Can be time-consuming to evaluate different feature subsets.
+
+The Forest Fires dataset contains information about the weather and other environmental conditions that may affect the likelihood of a forest fire. Some possible features that may be important in this dataset include:
+
+1. Month: The weather and other environmental conditions can vary significantly from month to month.
+
+2. Day: The likelihood of a fire occurring may vary depending on the day of the week.
+
+3. Temperature: High temperatures can increase the likelihood of a fire.
+
+4. Humidity: Low humidity can increase the likelihood of a fire.
+
+5. Wind: Wind can spread a fire and make it more difficult to control.
+
+5. Rain: Wet conditions can reduce the likelihood of a fire.
