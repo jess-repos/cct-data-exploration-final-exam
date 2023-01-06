@@ -195,3 +195,18 @@ Take a look at the structure of the dataset
 str(df)
 ```
 
+#### a) Discuss and describe the purpose and need for data exploration and preparation within data analytics projects. Use illustrations to justify your answer. 
+
+Data exploration and preparation are important steps in the data analytics process because they help to ensure that the data being analyzed is accurate, relevant, and usable. These steps involve examining the data to understand its quality, structure, and relationships, and then cleaning and transforming the data as needed to make it suitable for analysis.
+
+There are several reasons why data exploration and preparation are necessary in data analytics projects:
+
+Quality: Data quality is critical for accurate analysis and decision-making. Data exploration allows you to identify any errors, inconsistencies, or missing values in the data and take steps to fix them.
+
+Structure: Data may be structured in a way that is not conducive to the type of analysis you are planning to do. For example, you may need to pivot, merge, or split data sets to get them into a usable format.
+
+Relevance: Not all data is relevant to the question or problem you are trying to solve. Data exploration allows you to identify and select only the data that is relevant to your analysis.
+
+Usability: Data may be in a format that is not easily usable by the tools or software you are using for your analysis. Data preparation involves transforming the data into a usable format, such as converting it to a comma-separated values (CSV) file.
+
+![Illustration](data-exploration-illustration.jpeg)
