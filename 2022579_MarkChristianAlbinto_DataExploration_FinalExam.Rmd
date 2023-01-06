@@ -1,0 +1,181 @@
+---
+title: "Data Exploration Final Exam"
+output: html_notebook
+---
+
+Student: 2022579 Mark Christian Albinto
+
+Lecturer: Muhammad Iqbal
+
+Date: 06 January 2023 10:00 - 07 January 2023 10:00
+
+---
+
+Clear all environment variables for new project
+
+```{r}
+rm(list = ls())
+```
+
+
+# Assessment Tasks
+
+### Question 1
+
+Create the table/dataframe for question 1 (Table 2.1)
+
+```{r}
+table_21_customer_id <- c(1001, 1002, 1003, 1004, 1005)
+table_21_zip <- c(10048, 'J2S7K7', 90210, 6269, 55101)
+table_21_gender <- c('M', 'F', NA, 'M', 'F')
+table_21_income <- c(78000, -40000, 10000000, 50000, 99999)
+table_21_age <- c('C', 40, 45, 0, 30)
+table_21_marital_status <- c('M', 'W', 'S', 'S', 'D')
+table_21_transaction_amount <- c(5000, 4000, 7000, 1000, 3000)
+
+df_table_21 <- data.frame(table_21_customer_id, table_21_zip, table_21_gender, table_21_income, table_21_age, table_21_marital_status, table_21_transaction_amount)
+
+table21_column_names <- c('Customer_ID', 'Zip', 'Gender', 'Income', 'Age', 'Marital_Status', 'Transaction_Amount')
+colnames(df_table_21) <- table21_column_names
+
+df_table_21
+```
+
+Let us check the structure of the dataframe
+
+```{r}
+str(df_table_21)
+```
+
+#### a) Refer to the income attribute of the five customers in Table 2.1, before pre-processing.
+
+##### a:i)	Find the mean income before pre-processing.
+
+```{r}
+table_21_income_mean <- mean(df_table_21$Income)
+
+table_21_income_mean
+```
+
+##### a:ii) What does this number actually mean?
+
+The value represents the "average" of the values in the dataset, but it may not be representative of the majority of the values. This is because the mean is sensitive to outliers, or values that are significantly higher or lower than the majority of the values in the dataset. In this case, the value of 10,000,000 is an outlier that is pulling the mean up significantly.
+
+```{r}
+barplot(df_table_21$Income)
+abline(h = table_21_income_mean)
+```
+
+##### a:iii) Now, calculate the mean income for the three values left after pre-processing. Does this value have a meaning?
+
+In the case of the values in Income, it is likely that the values -40000 and 10000000 are considered outliers because they are much smaller and much larger, respectively, than the other values in the list. These extreme values could potentially skew the results of statistical analyses, such as mean and median calculations, and may not be representative of the underlying data.
+
+By removing these outliers, you can obtain a more accurate and representative view of the data.
+
+```{r}
+df_table_21_income_processed <- df_table_21$Income[c(1, 4, 5)]
+
+df_table_21_income_processed_mean <- mean(df_table_21_income_processed)
+
+df_table_21_income_processed_mean
+```
+
+```{r}
+barplot(df_table_21_income_processed)
+abline(h = df_table_21_income_processed_mean)
+```
+
+The new mean does have value because it provides a new summary statistic for the data. However, it is important to consider how the removal of the outliers has affected the mean and whether or not the new mean is representative of the underlying data. Removing outliers can change the mean and may result in a different interpretation of the data. It is important to carefully consider whether or not to remove outliers, as they may contain important information and may not always be the result of measurement errors or other anomalies.
+
+#### b) Explain why zip codes should be considered text variables rather than numeric.
+
+Zip codes should be considered text variables rather than numeric variables because they do not have a natural ordering. For example, the zip code "90210" is not greater than or less than the zip code "10001". Therefore, it doesn't make sense to perform mathematical operations like addition or subtraction on zip codes.
+
+In addition, zip codes may contain leading zeros, which can be lost when they are treated as numeric variables. For example, the zip code "00210" would be stored as 210 if it were treated as a numeric variable, but this would lose important information.
+
+In general, it is a good idea to treat variables that represent categorical data, such as zip codes, as text variables rather than numeric variables. This will ensure that the data is stored and analyzed correctly.
+
+Here are a few points to consider when deciding whether to treat zip codes as text or numeric variables:
+
+* Zip codes are often used to identify geographic regions, such as cities, neighborhoods, or census tracts. They are not continuous variables like height or weight, which can take on any value within a certain range.
+
+* Zip codes do not have a natural unit of measurement. For example, a height of 5'10" can be expressed as 70 inches, and a weight of 150 pounds can be expressed as 68 kilograms. There is no equivalent unit for zip codes.
+
+* Some zip codes contain letters, in addition to numbers. For example, the zip code for the Canadian city of Laval, Quebec is "H7L 5W2". This would not be possible if zip codes were treated as numeric variables.
+
+* Zip codes are often used as a key field in databases. This means that they are used to uniquely identify records in a table. It is generally easier to use text fields as keys, rather than numeric fields, because text fields can accommodate a wider range of values and are less prone to errors.
+
+In summary, while it is possible to treat zip codes as numeric variables, it is generally more appropriate to treat them as text variables. This will ensure that the data is stored and analyzed correctly, and will make it easier to use zip codes as keys in databases.
+
+#### c) Identify which columns are suitable for the categorical datatypes in the Table 2.1 and provide the appropriate encoding scheme to replace the variables with numeric data.
+
+The following columns are suitable for the categorical datatypes:
+
+* 'Customer ID': This column represents a unique identifier for each customer, and the values are not ordered or continuous. Therefore, it is suitable for a categorical datatype.
+
+* 'Zip': This column represents a zip code, which is a categorical variable because it does not have a natural ordering.
+
+* 'Gender': This column represents a person's gender, which is a categorical variable because it is not a continuous or ordered variable.
+
+* 'Marital Status': This column represents a person's marital status, which is a categorical variable because it is not a continuous or ordered variable.
+
+To replace these variables with numeric data, you can use an encoding scheme such as one-hot encoding. One-hot encoding creates a new binary column for each category, with a value of 1 indicating that the row belongs to that category and a value of 0 indicating that it does not.
+
+For example, to one-hot encode the 'Gender' column, you would create two new binary columns: 'Gender_Male' and 'Gender_Female'. Each row would have a value of 1 in either the 'Gender_Male' column or the 'Gender_Female' column, depending on the person's gender.
+
+Here is a demonstration of One-hot Encoding the Gender and Marital Status column using dummyVars function from caret library
+
+```{r}
+# install.packages('caret')
+library(caret)
+
+df_table_21_one_hot_formula_gender <- dummyVars("~ Gender", data=df_table_21)
+
+df_table_21_one_hot_gender <- data.frame(predict(df_table_21_one_hot_formula_gender, newdata = df_table_21))
+
+df_table_21_one_hot_gender
+```
+
+```{r}
+df_table_21_one_hot_formula_marital_status <- dummyVars("~ Marital_Status", data=df_table_21)
+
+df_table_21_one_hot_marital_status <- data.frame(predict(df_table_21_one_hot_formula_marital_status, newdata = df_table_21))
+
+df_table_21_one_hot_marital_status
+```
+
+
+#### d) Explain why a birthdate variable would be preferred to an age variable in a database based on the presence of data attribute in Table 2.1
+
+There are several reasons why a birthdate variable might be preferred to an age variable in a database:
+
+1. A birthdate variable is more accurate than an age variable because it is based on a specific point in time, whereas an age variable is based on a range of time. For example, if two people are both 30 years old, their ages could range from 30 years and 0 months to 30 years and 11 months, depending on their birthdays. This makes it difficult to accurately compare the ages of different people.
+
+2. A person's age changes every year, but their birthdate remains the same. This means that if you store a person's age in a database, you will need to update it every year. On the other hand, if you store a person's birthdate, it will not need to be updated.
+
+* Age can be calculated from a birthdate, but the reverse is not always possible. For example, if you only have an age and no birthdate, you cannot accurately determine the exact date of birth. This can lead to errors or inaccuracies in the data.
+
+3. With a birthdate, you can easily calculate a person's age at a given point in time. This can be useful for analyzing trends or patterns over time. With an age variable, you would not have this level of detail.
+
+4. A birthdate can be used to calculate a wide range of age-related variables, such as the number of days until a person's next birthday, the number of years since a person's birth, or a person's astrological sign. This is not possible with an age variable.
+
+Overall, a birthdate variable is generally preferred to an age variable in a database because it is more accurate, does not change, allows for more detailed analysis, and is more flexible.
+
+#### e) Explain why it is not recommended, as a strategy for dealing with missing data, to simply omit the records or fields with missing values from the analysis. Briefly explain your answer.
+
+There are a few reasons why it is generally not recommended to simply omit records or fields with missing values from the analysis:
+
+1. Loss of information: Omitting records or fields with missing values can result in the loss of important information. For example, if you omit a record with a missing value, you may be eliminating valuable data points that could have an impact on your analysis.
+
+2. Biased results: Omitting records or fields with missing values can result in biased or misleading results. For example, if you omit records with missing values, you may be introducing bias into your sample because the records you include in the analysis may not be representative of the entire population.
+
+3. Reduced sample size: Omitting records or fields with missing values can reduce the sample size, which can affect the reliability of the analysis. For example, if you have a small sample size to begin with, omitting records or fields with missing values can significantly reduce the sample size and make it more difficult to draw reliable conclusions.
+
+4. Missing data can be informative: In some cases, missing data can be informative in and of itself. For example, if you have a dataset with a field for income and a significant number of missing values, the fact that the income data is missing could be indicative of something important (e.g., a lack of income, a refusal to disclose income, a data entry error). Omitting records or fields with missing values could mask this important information.
+
+5. Missing data can be non-random: Missing data is often non-random, which means that it is more likely to occur in certain types of records or fields. For example, missing data is often more prevalent in fields that are sensitive or difficult to measure (e.g., income, race). Omitting records or fields with missing values could introduce bias into the analysis if the missing data is non-random.
+
+6. Other techniques are often more effective: There are many techniques for handling missing data that are more effective than simply omitting records or fields with missing values. For example, imputation techniques, such as mean imputation or multiple imputation, can be used to estimate missing values based on the available data. These techniques can help to preserve the sample size and reduce bias, while also accounting for the fact that the data is missing.
+
+Overall, it is generally not recommended to simply omit records or fields with missing values from the analysis because it can result in the loss of important information, biased results, and a reduced sample size. Instead, it is usually better to use a more sophisticated approach to handling missing data, such as imputation, which involves estimating missing values based on the available data.
+
