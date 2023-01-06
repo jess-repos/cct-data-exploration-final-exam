@@ -1,5 +1,5 @@
 ---
-title: "Data Exploration Final Exam"
+title: "Data Exploration and Preparation Final Exam"
 output: html_notebook
 ---
 
