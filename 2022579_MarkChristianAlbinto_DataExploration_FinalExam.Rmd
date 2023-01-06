@@ -41,7 +41,7 @@ colnames(df_table_21) <- table21_column_names
 df_table_21
 ```
 
-Let us check the structure of the dataframe
+Take a look at the structure of the dataframe
 
 ```{r}
 str(df_table_21)
@@ -178,4 +178,20 @@ There are a few reasons why it is generally not recommended to simply omit recor
 6. Other techniques are often more effective: There are many techniques for handling missing data that are more effective than simply omitting records or fields with missing values. For example, imputation techniques, such as mean imputation or multiple imputation, can be used to estimate missing values based on the available data. These techniques can help to preserve the sample size and reduce bias, while also accounting for the fact that the data is missing.
 
 Overall, it is generally not recommended to simply omit records or fields with missing values from the analysis because it can result in the loss of important information, biased results, and a reduced sample size. Instead, it is usually better to use a more sophisticated approach to handling missing data, such as imputation, which involves estimating missing values based on the available data.
+
+### Question 2
+
+Import Dataset
+
+```{r}
+df <- read.csv('forestfires.csv')
+
+head(df)
+```
+
+Take a look at the structure of the dataset
+
+```{r}
+str(df)
+```
 
