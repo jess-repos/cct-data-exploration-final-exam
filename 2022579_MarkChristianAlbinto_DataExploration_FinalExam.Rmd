@@ -70,7 +70,7 @@ abline(h = table_21_income_mean)
 
 In the case of the values in Income, it is likely that the values -40000 and 10000000 are considered outliers because they are much smaller and much larger, respectively, than the other values in the list. These extreme values could potentially skew the results of statistical analyses, such as mean and median calculations, and may not be representative of the underlying data.
 
-By removing these outliers, you can obtain a more accurate and representative view of the data.
+By removing these outliers, we can obtain a more accurate and representative view of the data.
 
 ```{r}
 df_table_21_income_processed <- df_table_21$Income[c(1, 4, 5)]
@@ -115,9 +115,9 @@ The following columns are suitable for the categorical datatypes:
 
 * 'Marital Status': This column represents a person's marital status (Divorced, Married, Single, Widowed), which is a categorical variable because it is not a continuous or ordered variable.
 
-To replace these variables with numeric data, you can use an encoding scheme such as one-hot encoding. One-hot encoding creates a new binary column for each category, with a value of 1 indicating that the row belongs to that category and a value of 0 indicating that it does not.
+To replace these variables with numeric data, we can use an encoding scheme such as one-hot encoding. One-hot encoding creates a new binary column for each category, with a value of 1 indicating that the row belongs to that category and a value of 0 indicating that it does not.
 
-For example, to one-hot encode the 'Gender' column, you would create two new binary columns: 'Gender_Male' and 'Gender_Female'. Each row would have a value of 1 in either the 'Gender_Male' column or the 'Gender_Female' column, depending on the person's gender.
+For example, to one-hot encode the 'Gender' column, we would create two new binary columns: 'Gender_Male' and 'Gender_Female'. Each row would have a value of 1 in either the 'Gender_Male' column or the 'Gender_Female' column, depending on the person's gender.
 
 Here is a demonstration of One-hot Encoding the Gender and Marital Status column using dummyVars function from caret library
 
@@ -163,25 +163,25 @@ There are several reasons why a birthdate variable might be preferred to an age 
 
 1. A birthdate variable is more accurate than an age variable because it is based on a specific point in time, whereas an age variable is based on a range of time. For example, if two people are both 30 years old, their ages could range from 30 years and 0 months to 30 years and 11 months, depending on their birthdays. This makes it difficult to accurately compare the ages of different people.
 
-2. A person's age changes every year, but their birthdate remains the same. This means that if you store a person's age in a database, you will need to update it every year. On the other hand, if you store a person's birthdate, it will not need to be updated.
+2. A person's age changes every year, but their birthdate remains the same. This means that if we store a person's age in a database, we will need to update it every year. On the other hand, if we store a person's birthdate, it will not need to be updated.
 
-3. Age can be calculated from a birthdate, but the reverse is not always possible. For example, if you only have an age and no birthdate, you cannot accurately determine the exact date of birth. This can lead to errors or inaccuracies in the data.
+3. Age can be calculated from a birthdate, but the reverse is not always possible. For example, if we only have an age and no birthdate, we cannot accurately determine the exact date of birth. This can lead to errors or inaccuracies in the data.
 
 4. A birthdate can be used to calculate a wide range of age-related variables, such as the number of days until a person's next birthday, the number of years since a person's birth, or a person's astrological sign. This is not possible with an age variable.
 
 In summary, a birthdate variable is generally preferred to an age variable in a database because it is more accurate, does not change, allows for more detailed analysis, and is more flexible.
 
-#### e) Explain why it is not recommended, as a strategy for dealing with missing data, to simply omit the records or fields with missing values from the analysis. Briefly explain your answer.
+#### e) Explain why it is not recommended, as a strategy for dealing with missing data, to simply omit the records or fields with missing values from the analysis. Briefly explain wer answer.
 
 There are a few reasons why it is generally not recommended to simply omit records or fields with missing values from the analysis:
 
-1. Loss of information: Omitting records or fields with missing values can result in the loss of important information. For example, if you omit a record with a missing value, you may be eliminating valuable data points that could have an impact on your analysis.
+1. Loss of information: Omitting records or fields with missing values can result in the loss of important information. For example, if we omit a record with a missing value, we may be eliminating valuable data points that could have an impact on wer analysis.
 
-2. Biased results: Omitting records or fields with missing values can result in biased or misleading results. For example, if you omit records with missing values, you may be introducing bias into your sample because the records you include in the analysis may not be representative of the entire population.
+2. Biased results: Omitting records or fields with missing values can result in biased or misleading results. For example, if we omit records with missing values, we may be introducing bias into wer sample because the records we include in the analysis may not be representative of the entire population.
 
-3. Reduced sample size: Omitting records or fields with missing values can reduce the sample size, which can affect the reliability of the analysis. For example, if you have a small sample size to begin with, omitting records or fields with missing values can significantly reduce the sample size and make it more difficult to draw reliable conclusions.
+3. Reduced sample size: Omitting records or fields with missing values can reduce the sample size, which can affect the reliability of the analysis. For example, if we have a small sample size to begin with, omitting records or fields with missing values can significantly reduce the sample size and make it more difficult to draw reliable conclusions.
 
-4. Missing data can be informative: In some cases, missing data can be informative in and of itself. For example, if you have a dataset with a field for income and a significant number of missing values, the fact that the income data is missing could be indicative of something important (e.g., a lack of income, a refusal to disclose income, a data entry error). Omitting records or fields with missing values could mask this important information.
+4. Missing data can be informative: In some cases, missing data can be informative in and of itself. For example, if we have a dataset with a field for income and a significant number of missing values, the fact that the income data is missing could be indicative of something important (e.g., a lack of income, a refusal to disclose income, a data entry error). Omitting records or fields with missing values could mask this important information.
 
 5. Missing data can be non-random: Missing data is often non-random, which means that it is more likely to occur in certain types of records or fields. For example, missing data is often more prevalent in fields that are sensitive or difficult to measure (e.g., income, race). Omitting records or fields with missing values could introduce bias into the analysis if the missing data is non-random.
 
@@ -205,25 +205,25 @@ Take a look at the structure of the dataset
 str(df_forest_fire)
 ```
 
-#### a) Discuss and describe the purpose and need for data exploration and preparation within data analytics projects. Use illustrations to justify your answer. 
+#### a) Discuss and describe the purpose and need for data exploration and preparation within data analytics projects. Use illustrations to justify wer answer. 
 
 Data exploration and preparation are important steps in the data analytics process because they help to ensure that the data being analyzed is accurate, relevant, and usable. These steps involve examining the data to understand its quality, structure, and relationships, and then cleaning and transforming the data as needed to make it suitable for analysis.
 
 There are several reasons why data exploration and preparation are necessary in data analytics projects:
 
-Quality: Data quality is critical for accurate analysis and decision-making. Data exploration allows you to identify any errors, inconsistencies, or missing values in the data and take steps to fix them.
+Quality: Data quality is critical for accurate analysis and decision-making. Data exploration allows we to identify any errors, inconsistencies, or missing values in the data and take steps to fix them.
 
-Structure: Data may be structured in a way that is not conducive to the type of analysis you are planning to do. For example, you may need to pivot, merge, or split data sets to get them into a usable format.
+Structure: Data may be structured in a way that is not conducive to the type of analysis we are planning to do. For example, we may need to pivot, merge, or split data sets to get them into a usable format.
 
-Relevance: Not all data is relevant to the question or problem you are trying to solve. Data exploration allows you to identify and select only the data that is relevant to your analysis.
+Relevance: Not all data is relevant to the question or problem we are trying to solve. Data exploration allows we to identify and select only the data that is relevant to wer analysis.
 
-Usability: Data may be in a format that is not easily usable by the tools or software you are using for your analysis. Data preparation involves transforming the data into a usable format, such as converting it to a comma-separated values (CSV) file.
+Usability: Data may be in a format that is not easily usable by the tools or software we are using for wer analysis. Data preparation involves transforming the data into a usable format, such as converting it to a comma-separated values (CSV) file.
 
 ![](data-exploration-illustration.jpeg)
 
 #### b)	Choose a relevant encoding technique to transform the categorical data to numeric format.
 
-Ordinal encoding: This involves assigning a unique integer value to each month or day. For example, you could assign 1 to January, 2 to February, and so on. This is useful if there is an inherent order to the months or days, such as when they are represented by numbers (e.g. 1 for January, 2 for February, etc.).
+Ordinal encoding: This involves assigning a unique integer value to each month or day. For example, we could assign 1 to January, 2 to February, and so on. This is useful if there is an inherent order to the months or days, such as when they are represented by numbers (e.g. 1 for January, 2 for February, etc.).
 
 Ordinal encoding is a way to encode categorical variables when there is an inherent order or ranking to the categories. An example of this would be months of the year, where January comes before February and so on. Similarly, the days of the week have an inherent order, with Monday coming before Tuesday and so on. By ordinal encoding these variables, we can preserve the ranking or order of the categories. This can be useful in certain machine learning models, particularly decision trees, where the order of the categories can be used to make decisions.
 
@@ -325,7 +325,7 @@ summary(df_forest_fire)
 
 
 2. How are the features related to one another?
-- Using scatter plots to visualize the relationships between pairs of features. You can also use correlation coefficients, such as Pearson's r, to quantify the strength and direction of the relationships.
+- Using scatter plots to visualize the relationships between pairs of features. we can also use correlation coefficients, such as Pearson's r, to quantify the strength and direction of the relationships.
 
 ```{r}
 # select numerical values from the dataframe
@@ -379,7 +379,7 @@ positive_correlation_unique[order(-positive_correlation_unique$value),]
 ```
 
 3. Are there any missing values in the dataset, and how are they distributed?
-- Using the is.na function in R to identify missing values, and you can use summary statistics and visualizations to understand how they are distributed.
+- Using the is.na function in R to identify missing values, and we can use summary statistics and visualizations to understand how they are distributed.
 
 ```{r}
 forest_fire_na_counts <- colSums(is.na(df_forest_fire[1:13]))
@@ -434,6 +434,159 @@ The Forest Fires dataset contains information about the weather and other enviro
 
 #### e) Prepare the data for the machine learning model after encoding and feature selection, predict the burned area of forest fires using the machine learning model.
 
-#### f) You are free to perform any process to enhance an understanding of data preparation and exploration of the Forest data set.
+Multiple linear regression is a type of regression analysis in which there are multiple independent variables (also known as explanatory variables) predicting a dependent variable. It is used to model the relationship between the independent variables and the dependent variable, and to predict the value of the dependent variable based on the values of the independent variables.
+
+In multiple linear regression, the relationship between the independent variables and the dependent variable is modeled using a linear equation of the form:
+
+y = b0 + b1x1 + b2x2 + ... + bn*xn
+
+where y is the dependent variable, x1, x2, ..., xn are the independent variables, and b0, b1, b2, ..., bn are the coefficients (also known as weights) that determine the strength and direction of the relationship between each independent variable and the dependent variable.
+
+Split the dataset into a training set and test set where the training set takes 80% of the observations while the remaining 20% is for the test set for prediction
+
+```{r}
+# install.packages('caTools')
+library(caTools)
+
+split <- sample.split(
+  Y = df_forest_fire$area,
+  SplitRatio = 0.8
+)
+
+training_set <- subset(df_forest_fire, split == TRUE)
+
+# create a subset excluding the month and day attributes as they have been encoded
+training_set <- training_set[, c(1,2, 5:15)]
+
+test_set <- subset(df_forest_fire, split == FALSE)
+
+# create a subset excluding the month and day attributes as they have been encoded
+test_set <- test_set[, c(1,2, 5:15)]
+```
+
+```{r}
+training_set
+```
+
+```{r}
+test_set
+```
+Fit multile linear regression into the training set
+
+```{r}
+regressor <- lm(
+  formula = area ~ .,
+  data = training_set
+)
+
+summary(regressor)
+```
+Using Backward eliminatio method to select a subset of the variables to include in a multiple linear regression model. The goal of backward elimination is to find the simplest model that is still able to explain the variance in the dependent variable.
+
+First we start with a full model that includes all of the variables that we are interested in. Then, we iteratively remove the variables that are least statistically significant until only the significant variables remain.
+
+To determine statistical significance, we can use a threshold such as p < 0.05, which means that there is less than a 5% chance that the relationship between the variable and the dependent variable occurred by chance.
+
+After using backward elimination, and are left with only one variable that has statistical significance, it means that this is the only variable that is significantly related to the dependent variable. This may indicate that the other variables are not important for explaining the variance in the dependent variable, or it may indicate that the remaining variable is correlated with the other variables and is "absorbing" their effects.
+
+```{r}
+regressor <- lm(
+  formula = area ~ temp ,
+  data = training_set
+)
+
+summary(regressor)
+```
+
+Create a new set from test set without the area variable to test predictions
+
+```{r}
+new_set = select(test_set, -area)
+
+new_set
+```
+
+Predicting the results
+
+```{r}
+y_pred <- predict(
+  regressor,
+  newdata = new_set
+)
+
+y_pred
+```
+
+Visualize training test results
+
+```{r}
+ggplot() + 
+  geom_point(
+    aes(
+      x = training_set$temp,  
+      y = training_set$area
+    ),
+    colour = 'red'
+  ) + 
+  ylim(0, 30) +
+  geom_line(
+    aes(
+      x = training_set$temp, 
+      predict(regressor, newdata = training_set)
+    ),
+    colour = 'blue'
+  ) + 
+  ggtitle('Temperature vs Area (Test Set)') + 
+  xlab('Temperature') + 
+  ylab('Area')
+```
+
+Visualize actual test results
+
+```{r}
+ggplot() + 
+  geom_point(
+    aes(
+      x = test_set$temp,  
+      y = test_set$area
+    ),
+    colour = 'red'
+  ) + 
+  geom_line(
+    aes(
+      x = training_set$temp, 
+      predict(regressor, newdata = training_set)
+    ),
+    colour = 'blue'
+  ) + 
+  ggtitle('Temperature vs Area (Test Set)') + 
+  xlab('Temperature') + 
+  ylab('Area')
+```
+
+Visualize predicted test results
+
+```{r}
+ggplot() + 
+  geom_point(
+    aes(
+      x = test_set$temp,  
+      y = y_pred
+    ),
+    colour = 'red'
+  ) + 
+  geom_line(
+    aes(
+      x = training_set$temp, 
+      predict(regressor, newdata = training_set)
+    ),
+    colour = 'blue'
+  ) + 
+  ggtitle('Temperature vs Area (Predicted Results)') + 
+  xlab('Temperature') + 
+  ylab('Area')
+```
+
+#### f) we are free to perform any process to enhance an understanding of data preparation and exploration of the Forest data set.
 
 Performed processes are provided in between tasks as demonstrations and visualizations. 

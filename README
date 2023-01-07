@@ -1,1 +1,19 @@
-Preview https://htmlpreview.github.io/?https://github.com/jess-repos/cct-data-exploration-final-exam/blob/main/2022579_MarkChristianAlbinto_DataExploration_FinalExam.nb.html
+Data Exploration and Preparation Alternative CA2
+
+Student: 2022579 Mark Christian Albinto
+Lecturer: Dr. Muhammad Iqbal
+
+Datasets: 
+	1. forestfire.csv
+	2. forestfire.names
+
+All of the report and demonstration are provided within the R Notebook (2022579_MarkChristianAlbinto_DataExploration_FinalExam.Rmd) file.
+
+How to use:
+	1. Install R Studio (version 2022.07.2) and R Language
+	2. Open Rmd file in R Studio 
+	3. Make sure that all datasets are on the same directory/folder as the script
+	4. Run All using Ctrl+Alt+R
+	5. Click the preview button on top left of R Studio
+
+Report Preview: https://htmlpreview.github.io/?https://github.com/jess-repos/cct-data-exploration-final-exam/blob/main/2022579_MarkChristianAlbinto_DataExploration_FinalExam.nb.html
